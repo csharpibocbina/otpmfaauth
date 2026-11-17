@@ -25,6 +25,9 @@ See [Plan.md](Plan.md) for the design. Layout: `src/` (.NET 10), `tests/` (xUnit
    $bytes = New-Object byte[] 48
    [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
    dotnet user-secrets set "Jwt:SigningKey" ([Convert]::ToBase64String($bytes))
+   dotnet user-secrets set "Vonage:ApiKey" "84a02e4b"
+   dotnet user-secrets set "Vonage:ApiSecret" "<ApiSecret value>"
+
    ```
    
    
