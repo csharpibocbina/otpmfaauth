@@ -12,13 +12,8 @@ See [Plan.md](Plan.md) for the design. Layout: `src/` (.NET 10), `tests/` (xUnit
    cd src/Otp.Api
    dotnet user-secrets init
    dotnet user-secrets set "ConnectionStrings:Supabase" "Host=<pooler-host>;Port=6543;Database=postgres;Username=<user>;Password=<pw>;SSL Mode=Require;Trust Server Certificate=true;No Reset On Close=true"
-   dotnet user-secrets set "Vonage:ApiKey" "<api key>"          # preferred: HTTP Basic auth
-   dotnet user-secrets set "Vonage:ApiSecret" "<api secret>"
-   # Alternative (only if no ApiKey/ApiSecret): application JWT auth
-   dotnet user-secrets set "Vonage:ApplicationId" "<application id>"
-   dotnet user-secrets set "Vonage:PrivateKey" "<contents of private.key PEM>"
    ```
-   ##Step 1 User-secrets config
+   ##Step 2 User-secrets config for JWT and OTP/MFA (Vonage or Twilio if preferred)
    ```
    cd src\Otp.Api
    dotnet user-secrets init
@@ -28,13 +23,12 @@ See [Plan.md](Plan.md) for the design. Layout: `src/` (.NET 10), `tests/` (xUnit
    dotnet user-secrets set "Vonage:ApiKey" "84a02e4b"
    dotnet user-secrets set "Vonage:ApiSecret" "<ApiSecret value>"
 
-   ```
-   
-   
+   ```   
    Create the Vonage application in the dashboard with the Verify capability and download its private key.
    A trial account can only message numbers you have whitelisted.
-4. **API:** `dotnet run --project src/Otp.Api` (default `http://localhost:5258`; if yours differs set `VITE_API_URL` in `web/.env.local`).
-5. **Web:** `cd web && npm install && npm run dev` -> http://localhost:5173
+   
+5. **API:** `dotnet run --project src/Otp.Api` (default `http://localhost:5258`; if yours differs set `VITE_API_URL` in `web/.env.local`).
+6. **Web:** `cd web && npm install && npm run dev` -> http://localhost:5173
 
 ## Tests
 
